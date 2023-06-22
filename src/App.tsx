@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  Box,
   DateStyled,
   Pronounciation,
   Word,
@@ -10,9 +9,15 @@ import {
   PosBlocks,
   Pos,
   Definition,
+  Flex,
+  Button,
+  WordBox,
+  ButtonBox,
 } from "./styled";
 import { generate } from "random-words";
 import WordInfo from "./types";
+import { Like } from "./components/Icons/Like";
+import { Unlike } from "./components/Icons/Unlike";
 
 function App() {
   const [wordInfo, setWordInfo] = useState<WordInfo | null>(null);
@@ -37,15 +42,20 @@ function App() {
 
   const getFormattedDate = () => {
     const date = new Date(); // Geçerli tarih ve saat
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    };
+    const formatter = new Intl.DateTimeFormat("en-US", options);
     const formattedDate = formatter.format(date);
     return formattedDate;
   };
 
   return (
     <Wrapper>
-      <Box>
+      <WordBox style={{ background: "#f8f9f9" }}>
         <DateStyled>{getFormattedDate()}</DateStyled>
         <Word>{wordInfo?.word}</Word>
         <Pronounciation>
@@ -56,12 +66,30 @@ function App() {
           wordInfo?.meanings.map((item, index) => (
             <PosBlocks key={index}>
               <Pos>{item.partOfSpeech}</Pos>
-              {item.definitions.slice(0, 3).map((def,index) => (
+              {item.definitions.slice(0, 3).map((def, index) => (
                 <Definition key={index}>{def.definition}</Definition>
               ))}
             </PosBlocks>
           ))}
-      </Box>
+      </WordBox>
+      <ButtonBox style={{ marginTop: "-40px" }}>
+        <Flex>
+          <Button
+            onClick={() => {
+              console.log("unlike");
+            }}
+          >
+            <Unlike />
+          </Button>
+          <Button
+            onClick={() => {
+              console.log("like");
+            }}
+          >
+            <Like />
+          </Button>
+        </Flex>
+      </ButtonBox>
     </Wrapper>
   );
 }
