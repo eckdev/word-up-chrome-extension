@@ -103,4 +103,8 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
   background: #fff;
+
+  &:hover {
+    background: #F8F9F9;
+  }
 `;

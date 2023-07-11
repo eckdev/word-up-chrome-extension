@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   DateStyled,
   Pronounciation,
@@ -18,18 +18,30 @@ import { generate } from "random-words";
 import WordInfo from "./types";
 import { Like } from "./components/Icons/Like";
 import { Unlike } from "./components/Icons/Unlike";
+import Loading from "./components/Loading";
+import { getFormattedDate } from "./utils";
 
 function App() {
   const [wordInfo, setWordInfo] = useState<WordInfo | null>(null);
-  useEffect(() => {
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  const getNewWord = useCallback(() => {
     const word = generate();
     getWord(word);
-  }, []);
+  },[])
 
+  useEffect(() => {
+    setIsLoading(true);
+    getNewWord();
+  }, [getNewWord]);
+  
   const getWord = async (word: string[]) => {
     const result = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .finally(() => setIsLoading(false));
     setWordInfo(result[0]);
   };
 
@@ -40,56 +52,67 @@ function App() {
     }
   };
 
-  const getFormattedDate = () => {
-    const date = new Date(); // Geçerli tarih ve saat
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    };
-    const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDate = formatter.format(date);
-    return formattedDate;
+  const saveMisrememberedWord = (wordInfo: any) => {
+    const storedMisrememberedWords = localStorage.getItem("misrememberedWords");
+
+    const parsedMisrememberedWords = storedMisrememberedWords
+      ? JSON.parse(storedMisrememberedWords)
+      : [];
+
+    const updatedMisrememberedWords = [...parsedMisrememberedWords, wordInfo];
+
+    localStorage.setItem(
+      "misrememberedWords",
+      JSON.stringify(updatedMisrememberedWords)
+    );
+      getNewWord();
   };
+
+  const rememberedWord = () => {
+    getNewWord();
+  }
 
   return (
     <Wrapper>
-      <WordBox style={{ background: "#f8f9f9" }}>
-        <DateStyled>{getFormattedDate()}</DateStyled>
-        <Word>{wordInfo?.word}</Word>
-        <Pronounciation>
-          <Phonetic>{wordInfo?.phonetic}</Phonetic>
-          <PhoneticAudio onClick={playAudio} />
-        </Pronounciation>
-        {wordInfo?.meanings &&
-          wordInfo?.meanings.map((item, index) => (
-            <PosBlocks key={index}>
-              <Pos>{item.partOfSpeech}</Pos>
-              {item.definitions.slice(0, 3).map((def, index) => (
-                <Definition key={index}>{def.definition}</Definition>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <WordBox style={{ background: "#f8f9f9" }}>
+            <DateStyled>{getFormattedDate()}</DateStyled>
+            <Word>{wordInfo?.word}</Word>
+            <Pronounciation>
+              <Phonetic>{wordInfo?.phonetic}</Phonetic>
+              <PhoneticAudio onClick={playAudio} />
+            </Pronounciation>
+            {wordInfo?.meanings &&
+              wordInfo?.meanings.map((item, index) => (
+                <PosBlocks key={index}>
+                  <Pos>{item.partOfSpeech}</Pos>
+                  {item.definitions.slice(0, 3).map((def, index) => (
+                    <Definition key={index}>{def.definition}</Definition>
+                  ))}
+                </PosBlocks>
               ))}
-            </PosBlocks>
-          ))}
-      </WordBox>
-      <ButtonBox style={{ marginTop: "-40px" }}>
-        <Flex>
-          <Button
-            onClick={() => {
-              console.log("unlike");
-            }}
-          >
-            <Unlike />
-          </Button>
-          <Button
-            onClick={() => {
-              console.log("like");
-            }}
-          >
-            <Like />
-          </Button>
-        </Flex>
-      </ButtonBox>
+          </WordBox>
+          <ButtonBox style={{ marginTop: "-40px" }}>
+            <Flex>
+              <Button
+                title="Misremember"
+                onClick={() => saveMisrememberedWord(wordInfo)}
+              >
+                <Unlike />
+              </Button>
+              <Button
+                title="Remember"
+                onClick={rememberedWord}
+              >
+                <Like />
+              </Button>
+            </Flex>
+          </ButtonBox>
+        </>
+      )}
     </Wrapper>
   );
 }
