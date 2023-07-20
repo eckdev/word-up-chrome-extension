@@ -41,6 +41,7 @@ function App() {
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     )
       .then((res) => res.json())
+      .catch(() => { getNewWord()})
       .finally(() => setIsLoading(false));
     setWordInfo(result[0]);
   };
@@ -59,7 +60,12 @@ function App() {
       ? JSON.parse(storedMisrememberedWords)
       : [];
 
-    const updatedMisrememberedWords = [...parsedMisrememberedWords, wordInfo];
+      const rw = {
+        word: wordInfo,
+        date: new Date(),
+        id: Math.random().toString(16).slice(2)
+      }
+    const updatedMisrememberedWords = [...parsedMisrememberedWords, rw];
 
     localStorage.setItem(
       "misrememberedWords",
