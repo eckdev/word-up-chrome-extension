@@ -52,10 +52,8 @@ const Analytics = () => {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
   
-    // Verileri tarihe göre gruplamak için bir nesne oluşturuyoruz
     const groupedData:any = {};
-  
-    // Eksik günler için tüm günleri 0 olarak başlatıyoruz
+
     const daysInWeek = 7;
     const currentDate = new Date(oneWeekAgo);
     for (let i = 0; i < daysInWeek; i++) {
@@ -64,7 +62,6 @@ const Analytics = () => {
       currentDate.setDate(currentDate.getDate() + 1);
     }
   
-    // Verileri tarihlerine göre gruplayarak word değerlerini sayıyoruz
     for (const item of data) {
       const date = new Date(item.date);
       if (date >= oneWeekAgo) {
@@ -77,7 +74,6 @@ const Analytics = () => {
       }
     }
   
-    // Sonuçları istenen formatta oluşturuyoruz
     const result = [];
     for (const date in groupedData) {
       result.push({ name: date, [objectName]: groupedData[date] });
@@ -89,7 +85,6 @@ const Analytics = () => {
  const mergeArraysAsObjects = (mrwArray:any, rwArray:any) =>  {
   const mergedArray = [];
 
-  // Elemanları birleştiriyoruz
   for (let i = 0; i < mrwArray.length; i++) {
     const mergedItem = {
       name: mrwArray[i].name,
