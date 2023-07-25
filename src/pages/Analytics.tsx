@@ -28,6 +28,7 @@ const Analytics = () => {
   const [rememberedWordsLenght, setRememberedWordsLenght] = useState(0);
   const [chartData, setChartData] = useState([]);
   useEffect(() => {
+    debugger
     const storedMisrememberedWords = localStorage.getItem("misrememberedWords");
     const storedRememberedWords = localStorage.getItem("rememberedWords");
 
@@ -56,7 +57,7 @@ const Analytics = () => {
 
     const daysInWeek = 7;
     const currentDate = new Date(oneWeekAgo);
-    for (let i = 0; i < daysInWeek; i++) {
+    for (let i = 0; i <= daysInWeek; i++) {
       const dateString = currentDate.toISOString().slice(0, 10);
       groupedData[dateString] = 0;
       currentDate.setDate(currentDate.getDate() + 1);

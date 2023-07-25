@@ -1,5 +1,6 @@
-export const getFormattedDate = () => {
-    const date = new Date(); // Geçerli tarih ve saat
+export const getFormattedDate = (date: Date) => {
+  if (date) {
+    const d = new Date(date);
     const options: Intl.DateTimeFormatOptions = {
       weekday: "long",
       month: "long",
@@ -7,6 +8,8 @@ export const getFormattedDate = () => {
       year: "numeric",
     };
     const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDate = formatter.format(date);
+    const formattedDate = formatter.format(d);
     return formattedDate;
-  };
+  }
+  return "";
+};

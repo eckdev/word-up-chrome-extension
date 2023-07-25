@@ -115,6 +115,8 @@ export const LinkStyled = styled(Link)`
   font-weight: bold;
   color: ${mainColor};
   font-size:16px;
+  margin-right: 8px;
+  margin-left: 8px;
 `;
 
 export const AnalyticsContainer = styled.div`
@@ -162,4 +164,14 @@ export const ChartWrapper = styled.div`
 width: 320px;
 height:320px;
 text-align:center;
+`;
+
+export const NoWordWrapper = styled.div`
+padding: 72px;
+text-align:center;
+`;
+
+export const NoWordText = styled.div`
+font-weight: bold;
+font-size:18px;
 `;

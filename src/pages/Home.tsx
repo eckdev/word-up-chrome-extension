@@ -14,6 +14,8 @@ import {
   WordBox,
   ButtonBox,
   LinkStyled,
+  NoWordWrapper,
+  NoWordText,
 } from "../styled";
 import { generate } from "random-words";
 import WordInfo from "../types";
@@ -41,9 +43,6 @@ function Home() {
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     )
       .then((res) => res.json())
-      .catch(() => {
-        getNewWord();
-      })
       .finally(() => setIsLoading(false));
     setWordInfo(result[0]);
   };
@@ -73,48 +72,59 @@ function Home() {
     getNewWord();
   };
 
+  const today = new Date();
   return (
     <Wrapper>
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <WordBox style={{ background: "#f8f9f9" }}>
-            <DateStyled>{getFormattedDate()}</DateStyled>
-            <Word>{wordInfo?.word}</Word>
-            <Pronounciation>
-              <Phonetic>{wordInfo?.phonetic}</Phonetic>
-              <PhoneticAudio onClick={playAudio} />
-            </Pronounciation>
-            {wordInfo?.meanings &&
-              wordInfo?.meanings.map((item, index) => (
-                <PosBlocks key={index}>
-                  <Pos>{item.partOfSpeech}</Pos>
-                  {item.definitions.slice(0, 3).map((def, index) => (
-                    <Definition key={index}>{def.definition}</Definition>
+          {wordInfo && (
+            <>
+              <WordBox style={{ background: "#f8f9f9" }}>
+                <DateStyled>{getFormattedDate(today)}</DateStyled>
+                <Word>{wordInfo?.word}</Word>
+                <Pronounciation>
+                  <Phonetic>{wordInfo?.phonetic}</Phonetic>
+                  {wordInfo?.phonetics[0]?.audio && <PhoneticAudio onClick={playAudio} />}
+                </Pronounciation>
+                {wordInfo?.meanings &&
+                  wordInfo?.meanings.map((item, index) => (
+                    <PosBlocks key={index}>
+                      <Pos>{item.partOfSpeech}</Pos>
+                      {item.definitions.slice(0, 3).map((def, index) => (
+                        <Definition key={index}>{def.definition}</Definition>
+                      ))}
+                    </PosBlocks>
                   ))}
-                </PosBlocks>
-              ))}
-          </WordBox>
-          <ButtonBox>
-            <Flex>
-              <Button
-                title="Misremember"
-                onClick={() => storageWord("misrememberedWords", wordInfo)}
-              >
-                <Stack />
-              </Button>
-              <Button
-                title="Remember"
-                onClick={() => storageWord("rememberedWords", wordInfo)}
-              >
-                <Like />
-              </Button>
-            </Flex>
-          </ButtonBox>
-          <ButtonBox style={{ marginTop: "-20px", textAlign: "center" }}>
-            <LinkStyled to="/analytics">Go To Analytics</LinkStyled>
-          </ButtonBox>
+              </WordBox>
+              <ButtonBox>
+                <Flex>
+                  <Button
+                    title="Misremember"
+                    onClick={() => storageWord("misrememberedWords", wordInfo)}
+                  >
+                    <Stack />
+                  </Button>
+                  <Button
+                    title="Remember"
+                    onClick={() => storageWord("rememberedWords", wordInfo)}
+                  >
+                    <Like />
+                  </Button>
+                </Flex>
+              </ButtonBox>
+              <ButtonBox style={{ marginTop: "-20px", textAlign: "center" }}>
+                <LinkStyled to="/analytics">Go To Analytics</LinkStyled> |
+                <LinkStyled to="/misremember">Go To Stacks</LinkStyled>
+              </ButtonBox>
+            </>
+          )}
+          {!wordInfo && 
+          <NoWordWrapper>
+            <NoWordText>Opps! Something went wrong.</NoWordText>
+          </NoWordWrapper>
+          }
         </>
       )}
     </Wrapper>
