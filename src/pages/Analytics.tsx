@@ -26,7 +26,7 @@ import {
 const Analytics = () => {
   const [misrememberedWordsLenght, setMisrememberedWordsLenght] = useState(0);
   const [rememberedWordsLenght, setRememberedWordsLenght] = useState(0);
-  const [chartData, setChartData] = useState([])
+  const [chartData, setChartData] = useState([]);
   useEffect(() => {
     const storedMisrememberedWords = localStorage.getItem("misrememberedWords");
     const storedRememberedWords = localStorage.getItem("rememberedWords");
@@ -39,20 +39,20 @@ const Analytics = () => {
       ? JSON.parse(storedRememberedWords)
       : [];
 
-    const mrwData = getData(parsedMisrememberedWords,"misrememberedWords");
-    const rwData = getData(parsedRememberedWords,"rememberedWords");
+    const mrwData = getData(parsedMisrememberedWords, "misrememberedWords");
+    const rwData = getData(parsedRememberedWords, "rememberedWords");
 
-    const result:any = mergeArraysAsObjects(mrwData,rwData)
+    const result: any = mergeArraysAsObjects(mrwData, rwData);
     setChartData(result);
     setRememberedWordsLenght(parsedRememberedWords?.length);
     setMisrememberedWordsLenght(parsedMisrememberedWords?.length);
   }, []);
 
-  const getData = (data:any,objectName: string) => {
+  const getData = (data: any, objectName: string) => {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  
-    const groupedData:any = {};
+
+    const groupedData: any = {};
 
     const daysInWeek = 7;
     const currentDate = new Date(oneWeekAgo);
@@ -61,7 +61,7 @@ const Analytics = () => {
       groupedData[dateString] = 0;
       currentDate.setDate(currentDate.getDate() + 1);
     }
-  
+
     for (const item of data) {
       const date = new Date(item.date);
       if (date >= oneWeekAgo) {
@@ -73,29 +73,29 @@ const Analytics = () => {
         }
       }
     }
-  
+
     const result = [];
     for (const date in groupedData) {
       result.push({ name: date, [objectName]: groupedData[date] });
     }
-  
+
     return result;
   };
 
- const mergeArraysAsObjects = (mrwArray:any, rwArray:any) =>  {
-  const mergedArray = [];
+  const mergeArraysAsObjects = (mrwArray: any, rwArray: any) => {
+    const mergedArray = [];
 
-  for (let i = 0; i < mrwArray.length; i++) {
-    const mergedItem = {
-      name: mrwArray[i].name,
-      learning: mrwArray[i].misrememberedWords,
-      mastered: rwArray[i].rememberedWords,
-    };
-    mergedArray.push(mergedItem);
-  }
+    for (let i = 0; i < mrwArray.length; i++) {
+      const mergedItem = {
+        name: mrwArray[i].name,
+        learning: mrwArray[i].misrememberedWords,
+        mastered: rwArray[i].rememberedWords,
+      };
+      mergedArray.push(mergedItem);
+    }
 
-  return mergedArray;
-}
+    return mergedArray;
+  };
 
   return (
     <Wrapper>
@@ -118,7 +118,7 @@ const Analytics = () => {
             </Box>
           </Flex>
         </StatisticsPanel>
-        <StatisticsPanel style={{paddingBottom: 36}}>
+        <StatisticsPanel style={{ paddingBottom: 36 }}>
           <ChartWrapper>
             <h3>Week</h3>
             <ResponsiveContainer width="100%" height="100%">
@@ -141,16 +141,18 @@ const Analytics = () => {
                 <CartesianGrid stroke="#F8F9F9" />
                 <XAxis dataKey="name" />
                 <Tooltip />
-<Legend />
+                <Legend />
                 <Bar dataKey="learning" barSize={20} fill="url(#colorUv)" />
                 <Line type="monotone" dataKey="mastered" stroke="#4f42d8" />
               </ComposedChart>
             </ResponsiveContainer>
           </ChartWrapper>
         </StatisticsPanel>
-        <ButtonBox style={{ padding:0 ,marginTop: "50px", textAlign: "center" }}>
-            <LinkStyled to="/">Go To Home</LinkStyled>
-          </ButtonBox>
+        <ButtonBox
+          style={{ padding: 0, marginTop: "50px", textAlign: "center" }}
+        >
+          <LinkStyled to="/">Go To Home</LinkStyled>
+        </ButtonBox>
       </AnalyticsContainer>
     </Wrapper>
   );

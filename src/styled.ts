@@ -114,6 +114,7 @@ export const LinkStyled = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   color: ${mainColor};
+  font-size:16px;
 `;
 
 export const AnalyticsContainer = styled.div`
