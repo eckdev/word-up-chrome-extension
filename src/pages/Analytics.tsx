@@ -101,7 +101,7 @@ const Analytics = () => {
   return (
     <Wrapper>
       <AnalyticsContainer>
-        <h3>Analytics</h3>
+        <h3>Overview</h3>
         <StatisticsPanel>
           <Flex>
             <Box>

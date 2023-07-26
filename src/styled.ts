@@ -175,3 +175,10 @@ export const NoWordText = styled.div`
 font-weight: bold;
 font-size:18px;
 `;
+
+export const InfoText = styled.div`
+color: #B5B9C0;
+font-size:14px;
+font-style: italic;
+line-height: 16px;
+`;

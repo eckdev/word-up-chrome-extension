@@ -16,6 +16,7 @@ import {
   LinkStyled,
   NoWordWrapper,
   NoWordText,
+  InfoText,
 } from "../styled";
 import { generate } from "random-words";
 import WordInfo from "../types";
@@ -116,7 +117,11 @@ function Home() {
               </ButtonBox>
               <ButtonBox style={{ marginTop: "-20px", textAlign: "center" }}>
                 <LinkStyled to="/analytics">Go To Analytics</LinkStyled> |
-                <LinkStyled to="/misremember">Go To Stacks</LinkStyled>
+                <LinkStyled to="/misremember">Go To Learn List</LinkStyled>
+              </ButtonBox>
+
+              <ButtonBox style={{ marginTop: "-20px", textAlign: "center",paddingBottom:'8px' }}>
+                <InfoText>Confirmation button shows you know the word. Stack button indicates that you don't know the word and want to learn it later.</InfoText>
               </ButtonBox>
             </>
           )}
