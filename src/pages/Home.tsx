@@ -18,7 +18,6 @@ import {
   NoWordText,
   InfoText,
 } from "../styled";
-import { generate } from "random-words";
 import WordInfo from "../types";
 import { Like } from "../components/Icons/Like";
 import Loading from "../components/Loading";
@@ -30,8 +29,14 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
 
   const getNewWord = useCallback(() => {
-    const word = generate();
-    getWord(word);
+    import(`../data/advanced.json`)
+      .then((res) => {
+        const data: string[] = res.Words
+        const word = data[Math.floor(Math.random()*data.length)];
+        getWord(word);
+      })
+      .catch(_ => null);
+
   }, []);
 
   useEffect(() => {
@@ -39,7 +44,7 @@ function Home() {
     getNewWord();
   }, [getNewWord]);
 
-  const getWord = async (word: string[]) => {
+  const getWord = async (word: string) => {
     const result = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     )
@@ -93,7 +98,7 @@ function Home() {
                   wordInfo?.meanings.map((item, index) => (
                     <PosBlocks key={index}>
                       <Pos>{item.partOfSpeech}</Pos>
-                      {item.definitions.slice(0, 3).map((def, index) => (
+                      {item.definitions.slice(0, 1).map((def, index) => (
                         <Definition key={index}>{def.definition}</Definition>
                       ))}
                     </PosBlocks>
