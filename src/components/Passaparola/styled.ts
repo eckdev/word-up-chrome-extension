@@ -58,7 +58,7 @@ export const AlphabetSlideWrapper = styled.div<StatusProps>`
 
 export const QuestionWrapper = styled.div`
     position: absolute;
-    top: 18%;
+    top: 24%;
     width: 380px;
     padding: 16px 10px;
     font-size: 28px;

@@ -182,3 +182,30 @@ font-size:14px;
 font-style: italic;
 line-height: 16px;
 `;
+
+export const GameModeText = styled.div` 
+  font-weight: bold;
+  font-size: 18px;
+`
+
+export const Logo = styled.div` 
+  font-weight: bold;
+  font-size: 40px;
+  color: ${mainColor};
+  margin-bottom: 32px;
+`
+
+export const GameModePanel = styled.div`
+padding: 16px;
+border-radius: 12px;
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+border: none;
+cursor: pointer;
+background: #4F42D8;
+color: #fff;
+margin-bottom:16px;
+&:hover {
+  background: #9098ff;
+}
+`;

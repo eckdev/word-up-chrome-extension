@@ -4,6 +4,7 @@ import { answerStatus } from "../../utils";
 import { alphabet } from "../../data/alphabet";
 import { AnswerButton, AnswerInput, AnswerWrapper } from "./styled";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 type SlideNextButtonProps = {
   activeIndex: number;
@@ -17,6 +18,8 @@ export default function SlideNextButton({
 }: SlideNextButtonProps) {
   const swiper = useSwiper();
   const [inputValue, setInputValue] = useState("");
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
@@ -108,7 +111,7 @@ export default function SlideNextButton({
           ? findNearestIndex
           : passedWords[0]?.id;
       if (nextIndex === null) {
-        alert("oyun bitti");
+        navigate("/panalytics");
         return;
       }
       swiper.slideTo(nextIndex || 0);
@@ -121,6 +124,10 @@ export default function SlideNextButton({
       swiper?.slideNext();
       setActiveIndex((prevIndex: number) => prevIndex + 1);
     } else {
+      if (passedWords.length === 0) {
+        navigate("/panalytics");
+        return;
+      }
       const firstPassedIndex = passedWords[0]?.id;
       swiper?.slideTo(firstPassedIndex || 0);
       setActiveIndex(firstPassedIndex || 0);

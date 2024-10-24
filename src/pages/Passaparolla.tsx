@@ -9,6 +9,8 @@ import { Wrapper } from "../styled";
 import AlphabetSlideItem from "../components/Passaparola/AlphabetSlide";
 import { alphabet } from "../data/alphabet";
 import { Question, QuestionWrapper } from "../components/Passaparola/styled";
+import { Back } from "../components/Icons/Back";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -18,6 +20,8 @@ const Passaparola = (props: Props) => {
   const storedAnswers = localStorage.getItem("answers");
   const isReturnPassedItems = localStorage.getItem("isReturnPassedItems");
   const parsedAnswers = storedAnswers ? JSON.parse(storedAnswers) : [];
+
+  const navigate = useNavigate();
 
   const getQuestion = () => {
     return (
@@ -33,6 +37,12 @@ const Passaparola = (props: Props) => {
 
   return (
     <Wrapper>
+      <div
+        style={{ paddingLeft: "16px", paddingTop: '16px',cursor: "pointer" }}
+        onClick={() => navigate("/")}
+      >
+        <Back />
+      </div>
       <Swiper
         slidesPerView={4}
         allowTouchMove={false}
@@ -74,7 +84,7 @@ const Passaparola = (props: Props) => {
             );
           })}
 
-        <div style={{ position: "absolute", bottom: '16px', zIndex: 999 }}>
+        <div style={{ position: "absolute", bottom: "16px", zIndex: 999 }}>
           <SlideNextButton
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}

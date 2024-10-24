@@ -23,20 +23,23 @@ import { Like } from "../components/Icons/Like";
 import Loading from "../components/Loading";
 import { getFormattedDate } from "../utils";
 import { Stack } from "../components/Icons/Stack";
+import { Back } from "../components/Icons/Back";
+import { useNavigate } from "react-router-dom";
 
 function Words() {
   const [wordInfo, setWordInfo] = useState<WordInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const getNewWord = useCallback(() => {
     import(`../data/advanced.json`)
       .then((res) => {
-        const data: string[] = res.Words
-        const word = data[Math.floor(Math.random()*data.length)];
+        const data: string[] = res.Words;
+        const word = data[Math.floor(Math.random() * data.length)];
         getWord(word);
       })
-      .catch(_ => null);
-
+      .catch((_) => null);
   }, []);
 
   useEffect(() => {
@@ -88,11 +91,20 @@ function Words() {
           {wordInfo && (
             <>
               <WordBox style={{ background: "#f8f9f9" }}>
+                <div
+                  style={{ marginBottom: "16px", cursor: "pointer" }}
+                  onClick={() => navigate("/")}
+                >
+                  <Back />
+                </div>
+
                 <DateStyled>{getFormattedDate(today)}</DateStyled>
                 <Word>{wordInfo?.word}</Word>
                 <Pronounciation>
                   <Phonetic>{wordInfo?.phonetic}</Phonetic>
-                  {wordInfo?.phonetics[0]?.audio && <PhoneticAudio onClick={playAudio} />}
+                  {wordInfo?.phonetics[0]?.audio && (
+                    <PhoneticAudio onClick={playAudio} />
+                  )}
                 </Pronounciation>
                 {wordInfo?.meanings &&
                   wordInfo?.meanings.map((item, index) => (
@@ -125,16 +137,26 @@ function Words() {
                 <LinkStyled to="/misremember">Go To Learn List</LinkStyled>
               </ButtonBox>
 
-              <ButtonBox style={{ marginTop: "-20px", textAlign: "center",paddingBottom:'8px' }}>
-                <InfoText>Confirmation button shows you know the word. Stack button indicates that you don't know the word and want to learn it later.</InfoText>
+              <ButtonBox
+                style={{
+                  marginTop: "-20px",
+                  textAlign: "center",
+                  paddingBottom: "8px",
+                }}
+              >
+                <InfoText>
+                  Confirmation button shows you know the word. Stack button
+                  indicates that you don't know the word and want to learn it
+                  later.
+                </InfoText>
               </ButtonBox>
             </>
           )}
-          {!wordInfo && 
-          <NoWordWrapper>
-            <NoWordText>Opps! Something went wrong.</NoWordText>
-          </NoWordWrapper>
-          }
+          {!wordInfo && (
+            <NoWordWrapper>
+              <NoWordText>Opps! Something went wrong.</NoWordText>
+            </NoWordWrapper>
+          )}
         </>
       )}
     </Wrapper>
