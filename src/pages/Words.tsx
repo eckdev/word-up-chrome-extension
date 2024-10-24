@@ -24,7 +24,7 @@ import Loading from "../components/Loading";
 import { getFormattedDate } from "../utils";
 import { Stack } from "../components/Icons/Stack";
 
-function Home() {
+function Words() {
   const [wordInfo, setWordInfo] = useState<WordInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -123,7 +123,6 @@ function Home() {
               <ButtonBox style={{ marginTop: "-20px", textAlign: "center" }}>
                 <LinkStyled to="/analytics">Go To Analytics</LinkStyled> |
                 <LinkStyled to="/misremember">Go To Learn List</LinkStyled>
-                <LinkStyled to="/passaparola">Go To Passaparola</LinkStyled>
               </ButtonBox>
 
               <ButtonBox style={{ marginTop: "-20px", textAlign: "center",paddingBottom:'8px' }}>
@@ -142,4 +141,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Words;

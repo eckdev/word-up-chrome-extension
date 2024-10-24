@@ -1,0 +1,164 @@
+{
+    "success": true,
+    "data": {
+        "questions": [
+            {
+                "id": 1664,
+                "question": "Erkek otoritesine dayanan bir t\u00fcr toplumsal \u00f6rg\u00fctlenme d\u00fczeni",
+                "letter": "A",
+                "answer": "Ataerkil, ataerkil toplum"
+            },
+            {
+                "id": 1602,
+                "question": "Al\u0131m ve de sat\u0131m i\u015fleri ile ilgilenmekte olan \u015firketlere arac\u0131l\u0131klar yapan komisyoncu",
+                "letter": "B",
+                "answer": "Broker"
+            },
+            {
+                "id": 964,
+                "question": "Cam ticaretini veya cam takmay\u0131 meslek edinmi\u015f kimse",
+                "letter": "C",
+                "answer": "Camc\u0131"
+            },
+            {
+                "id": 168,
+                "question": "Yasa d\u0131\u015f\u0131 i\u015fler yapmak veya etraf\u0131ndakileri korkutmak amac\u0131yla bir araya gelmi\u015f topluluk",
+                "letter": "\u00c7",
+                "answer": "\u00e7ete"
+            },
+            {
+                "id": 1694,
+                "question": "\u00c7E\u015e\u0130TL\u0130 TONLARI BULUNAN KIZIL KAHVE AT RENG\u0130",
+                "letter": "D",
+                "answer": "Doru"
+            },
+            {
+                "id": 566,
+                "question": "Bilirki\u015fi taraf\u0131ndan yap\u0131lan inceleme",
+                "letter": "E",
+                "answer": "Ekspertiz, Ekspertiz raporu"
+            },
+            {
+                "id": 220,
+                "question": "Belirli nesneler veya durumlar kar\u015f\u0131s\u0131nda duyulan ola\u011fan d\u0131\u015f\u0131 g\u00fc\u00e7l\u00fc korku",
+                "letter": "F",
+                "answer": "fobi"
+            },
+            {
+                "id": 230,
+                "question": "Tasa, kayg\u0131, \u00fcz\u00fcnt\u00fc",
+                "letter": "G",
+                "answer": "gam"
+            },
+            {
+                "id": 251,
+                "question": "Ayak bile\u011fine tak\u0131lan bilezik",
+                "letter": "H",
+                "answer": "halhal"
+            },
+            {
+                "id": 1199,
+                "question": "Dam\u0131tma i\u015finde kullan\u0131lan ara\u00e7, dam\u0131t\u0131c\u0131",
+                "letter": "\u0130",
+                "answer": "\u0130mbik"
+            },
+            {
+                "id": 756,
+                "question": "Sayg\u0131s\u0131zl\u0131\u011f\u0131 meziyet olarak kabul eden ki\u015fi",
+                "letter": "K",
+                "answer": "K\u00fcstah"
+            },
+            {
+                "id": 928,
+                "question": "\u00c7\u0131k\u0131\u015f yeri kolayl\u0131kla bulunamayacak kadar kar\u0131\u015f\u0131k koridorlar\u0131 olan yap\u0131",
+                "letter": "L",
+                "answer": "Labirent"
+            },
+            {
+                "id": 310,
+                "question": "Bir emek kar\u015f\u0131l\u0131\u011f\u0131nda ayl\u0131k, haftal\u0131k gibi verilen \u00f6denek",
+                "letter": "M",
+                "answer": "maa\u015f"
+            },
+            {
+                "id": 641,
+                "question": "Sinir sisteminin uyar\u0131y\u0131 iletmekle g\u00f6revli anatomik ve i\u015flevsel birimi",
+                "letter": "N",
+                "answer": "N\u00f6ron, n\u00f6ronlar"
+            },
+            {
+                "id": 343,
+                "question": "G\u00f6r\u00fcn\u00fc\u015fe g\u00f6re olaca\u011f\u0131 san\u0131lan, muhtemel",
+                "letter": "O",
+                "answer": "olas\u0131"
+            },
+            {
+                "id": 660,
+                "question": "Bir kurulu\u015fa ba\u011fl\u0131 alt b\u00f6l\u00fcmlerin b\u00fct\u00fcn\u00fc, te\u015fkilat",
+                "letter": "\u00d6",
+                "answer": "\u00d6rg\u00fct"
+            },
+            {
+                "id": 1178,
+                "question": "S\u00f6zs\u00fcz tiyatro oyunu, mim sanat\u0131",
+                "letter": "P",
+                "answer": "Pandomim, pandomim sanat\u0131"
+            },
+            {
+                "id": 392,
+                "question": "Derece, kerte",
+                "letter": "R",
+                "answer": "radde"
+            },
+            {
+                "id": 1192,
+                "question": "Yaln\u0131z bir t\u00fcre \u00f6zg\u00fc olan",
+                "letter": "S",
+                "answer": "Spesifik"
+            },
+            {
+                "id": 701,
+                "question": "Bir kara yolunda trafik \u00e7izgileri ile ayr\u0131lm\u0131\u015f b\u00f6l\u00fcmlerden her biri",
+                "letter": "\u015e",
+                "answer": "\u015eerit"
+            },
+            {
+                "id": 64,
+                "question": "Hava s\u0131cakl\u0131\u011f\u0131n\u0131 \u00f6l\u00e7meye yarayan alet",
+                "letter": "T",
+                "answer": "termometre"
+            },
+            {
+                "id": 37,
+                "question": "Belli bir i\u015fte belli bir konuda bilgili olan (kimse)",
+                "letter": "U",
+                "answer": "Uzman, Usta"
+            },
+            {
+                "id": 462,
+                "question": "Tan\u0131nm\u0131\u015f, \u015f\u00f6hretli, me\u015fhur",
+                "letter": "\u00dc",
+                "answer": "\u00fcnl\u00fc"
+            },
+            {
+                "id": 872,
+                "question": "Bula\u015f\u0131c\u0131 Hastal\u0131klara Yol A\u00e7an Mikrop",
+                "letter": "V",
+                "answer": "Vir\u00fcs, v\u0131rus"
+            },
+            {
+                "id": 487,
+                "question": "Delik ve y\u0131rt\u0131\u011f\u0131 uygun bir par\u00e7a ile onarma, kapatma",
+                "letter": "Y",
+                "answer": "yama, yama yapma, yama yapmak, yamalama, yamalamak"
+            },
+            {
+                "id": 1290,
+                "question": "Keyifli, e\u011flenceli olan",
+                "letter": "Z",
+                "answer": "Zevkli, zevk"
+            }
+        ]
+    },
+    "message": "Questions retrieved successfully."
+}

@@ -13,3 +13,9 @@ export const getFormattedDate = (date: Date) => {
   }
   return "";
 };
+
+export const answerStatus = {
+  passed: "passed",
+  success: "success",
+  failed: "failed"
+}
