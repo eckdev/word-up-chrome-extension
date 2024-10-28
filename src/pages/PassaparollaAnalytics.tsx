@@ -5,8 +5,10 @@ import {
   ButtonBox,
   Flex,
   LinkStyled,
+  StatisticsAnswerWrapper,
   StatisticsItem,
   StatisticsPanel,
+  StatisticsDetail,
   StatisticsTypo,
   VerticalSeperator,
   Wrapper,
@@ -53,25 +55,45 @@ const PassaparollaAnalytics = () => {
             </Box>
           </Flex>
         </StatisticsPanel>
-        <h3 style={{ marginTop: "16px", marginBottom: "16px" }}>Answers</h3>
-        <StatisticsPanel style={{ maxHeight: "300px", overflow: "auto" }}>
-          {parsedAnswers.length > 0 &&
-            parsedAnswers.map((item: any, index: number) => (
-              <Flex
-                key={index}
-                style={{
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <StatisticsItem color="#4f42d8">{item?.letter}</StatisticsItem>
-                <StatisticsTypo style={{ color: "#212121" }}>
-                  {item?.word?.toUpperCase()}
-                </StatisticsTypo>
-              </Flex>
-            ))}
-        </StatisticsPanel>
-
+        {parsedAnswers.length > 0 && (
+          <>
+            <h3 style={{ marginTop: "16px", marginBottom: "16px" }}>Answers</h3>
+            <StatisticsPanel style={{ maxHeight: "300px", overflow: "auto" }}>
+              {parsedAnswers.map((item: any, index: number) => (
+                <div
+                  style={{
+                    borderBottom: "1px solid #b5b9c0",
+                    marginBottom: "4px",
+                  }}
+                  key={index}
+                >
+                  <StatisticsAnswerWrapper>
+                    <StatisticsItem color="#4f42d8">
+                      {item?.letter}
+                    </StatisticsItem>
+                    <StatisticsTypo style={{ color: "#212121" }}>
+                      {item?.word?.toUpperCase()}
+                    </StatisticsTypo>
+                  </StatisticsAnswerWrapper>
+                  <div>
+                    <StatisticsDetail>
+                      <b>Question</b>:{" "}
+                      {item?.meanings?.find(
+                        (x: any) =>
+                          x.partOfSpeech === "verb" ||
+                          x.partOfSpeech === "noun" ||
+                          x.partOfSpeech === "adjective"
+                      )?.definitions[0].definition ?? "-"}
+                    </StatisticsDetail>
+                    <StatisticsDetail>
+                      <b>Your Answer</b>: {item?.yourAnswer ?? "-"}
+                    </StatisticsDetail>
+                  </div>
+                </div>
+              ))}
+            </StatisticsPanel>
+          </>
+        )}
         <ButtonBox
           style={{ padding: 0, marginTop: "50px", textAlign: "center" }}
         >

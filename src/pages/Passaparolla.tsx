@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -8,10 +8,16 @@ import SlideNextButton from "../components/Passaparola/SlideNextButton";
 import { Wrapper } from "../styled";
 import AlphabetSlideItem from "../components/Passaparola/AlphabetSlide";
 import { alphabet } from "../data/alphabet";
-import { Question, QuestionWrapper } from "../components/Passaparola/styled";
+import {
+  CountdownText,
+  CountdownWrapper,
+  Question,
+  QuestionWrapper,
+} from "../components/Passaparola/styled";
 import { Back } from "../components/Icons/Back";
 import { useNavigate } from "react-router-dom";
 import QuestionLoading from "../components/Passaparola/Loading";
+import { Count } from "../components/Icons/Count";
 
 type Props = {};
 
@@ -19,11 +25,29 @@ const Passaparola = (props: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [wordInfo, setWordInfo] = useState<any>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(10);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      navigate('/panalytics')
+      return;
+    };
+    const intervalId = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [navigate, timeLeft]);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
   const storedAnswers = localStorage.getItem("answers");
   const isReturnPassedItems = localStorage.getItem("isReturnPassedItems");
   const parsedAnswers = storedAnswers ? JSON.parse(storedAnswers) : [];
 
-  const navigate = useNavigate();
+
 
   const getQuestion = () => {
     return (
@@ -32,8 +56,7 @@ const Passaparola = (props: Props) => {
           x.partOfSpeech === "verb" ||
           x.partOfSpeech === "noun" ||
           x.partOfSpeech === "adjective"
-      )?.definitions[0].definition ??
-      "-"
+      )?.definitions[0].definition ?? "-"
     );
   };
 
@@ -97,6 +120,12 @@ const Passaparola = (props: Props) => {
         </div>
       </Swiper>
       <QuestionWrapper>
+        <CountdownWrapper>
+          <Count />{" "}
+          <CountdownText>
+            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          </CountdownText>
+        </CountdownWrapper>
         {isLoading ? (
           <QuestionLoading />
         ) : (

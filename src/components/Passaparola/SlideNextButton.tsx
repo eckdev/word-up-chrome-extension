@@ -54,6 +54,7 @@ export default function SlideNextButton({
       ...wordInfo,
       letter: activeLetter,
       id: activeIndex,
+      yourAnswer: inputValue.toLowerCase(),
       status,
     };
     storageAnswer(query);

@@ -114,7 +114,7 @@ export const LinkStyled = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   color: ${mainColor};
-  font-size:16px;
+  font-size: 16px;
   margin-right: 8px;
   margin-left: 8px;
 `;
@@ -122,90 +122,104 @@ export const LinkStyled = styled(Link)`
 export const AnalyticsContainer = styled.div`
   padding: 24px;
   position: relative;
-  background: #F8F9F9;
+  background: #f8f9f9;
 `;
 
 export const StatisticsPanel = styled.div`
-padding: 16px;
-border-radius: 12px;
-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-  0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-border: none;
-cursor: pointer;
-background: #fff;
-margin-bottom:16px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  margin-bottom: 16px;
 `;
 
 interface StatisticsItemProps {
-  color: string
+  color: string;
 }
 export const StatisticsItem = styled.div<StatisticsItemProps>`
-font-weight: bold;
-font-size: 24px;
-line-height:32px;
-color: ${props => props.color}
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  color: ${(props) => props.color};
 `;
 
 export const StatisticsTypo = styled.div`
-font-size: 14px;
-    color: #B5B9C0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #b5b9c0;
+`;
+
+export const StatisticsAnswerWrapper = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const StatisticsDetail = styled.div`
+  font-size: 14px;
+  color: #b5b9c0;
+  font-style: italic;
+  margin-bottom: 4px;
 `;
 
 export const VerticalSeperator = styled.div`
-border-left: 1px solid #F0F3F7;
-    height: 50px;
-`
+  border-left: 1px solid #f0f3f7;
+  height: 50px;
+`;
 
 export const Box = styled.div`
-text-align: center
+  text-align: center;
 `;
 
 export const ChartWrapper = styled.div`
-width: 320px;
-height:320px;
-text-align:center;
+  width: 320px;
+  height: 320px;
+  text-align: center;
 `;
 
 export const NoWordWrapper = styled.div`
-padding: 72px;
-text-align:center;
+  padding: 72px;
+  text-align: center;
 `;
 
 export const NoWordText = styled.div`
-font-weight: bold;
-font-size:18px;
+  font-weight: bold;
+  font-size: 18px;
 `;
 
 export const InfoText = styled.div`
-color: #B5B9C0;
-font-size:14px;
-font-style: italic;
-line-height: 16px;
+  color: #b5b9c0;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 16px;
 `;
 
-export const GameModeText = styled.div` 
+export const GameModeText = styled.div`
   font-weight: bold;
   font-size: 18px;
-`
+`;
 
-export const Logo = styled.div` 
+export const Logo = styled.div`
   font-weight: bold;
   font-size: 40px;
   color: ${mainColor};
   margin-bottom: 32px;
-`
+`;
 
 export const GameModePanel = styled.div`
-padding: 16px;
-border-radius: 12px;
-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-  0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-border: none;
-cursor: pointer;
-background: #4F42D8;
-color: #fff;
-margin-bottom:16px;
-&:hover {
-  background: #9098ff;
-}
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  border: none;
+  cursor: pointer;
+  background: #4f42d8;
+  color: #fff;
+  margin-bottom: 16px;
+  &:hover {
+    background: #9098ff;
+  }
 `;

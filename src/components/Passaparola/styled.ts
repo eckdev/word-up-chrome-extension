@@ -56,6 +56,20 @@ export const AlphabetSlideWrapper = styled.div<StatusProps>`
     ${(props) => (props.status === "active" ? mainColor : "transparent")};
 `;
 
+export const CountdownWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+`
+
+export const CountdownText = styled.div`
+    color: #444;
+    font-size: 20px;
+    line-height: 20px;
+    margin-left: 8px;
+`
+
 export const QuestionWrapper = styled.div`
     position: absolute;
     top: 24%;
@@ -66,7 +80,9 @@ export const QuestionWrapper = styled.div`
 export const Question = styled.div`
   font-weight: 700;
   color: #111;
-
+  max-height: 200px;
+  overflow: auto;
+  z-index:9999;
 `
 
 export const AnswerWrapper = styled.div`

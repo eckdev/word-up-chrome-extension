@@ -23,7 +23,7 @@ const AlphabetSlideItem = ({
 }: AlphabetSlideProps) => {
   const swiperSlide = useSwiperSlide();
   const getNewWord = useCallback(() => {
-    import(`../../data/advanced.json`)
+    import(`../../data/beginner.json`)
       .then((res) => {
         const data: string[] = res.Words;
         const wordsStartingWithLabel = data.filter((word) =>
