@@ -12,9 +12,9 @@ export const Back = ({ ...props }: SVGProps<SVGSVGElement>) => (
   fill="#4F42D8"
 >
   <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
     d="M5 12h14M5 12l6 6m-6-6l6-6"
   ></path>
 </svg>

@@ -11,12 +11,14 @@ import { alphabet } from "../data/alphabet";
 import { Question, QuestionWrapper } from "../components/Passaparola/styled";
 import { Back } from "../components/Icons/Back";
 import { useNavigate } from "react-router-dom";
+import QuestionLoading from "../components/Passaparola/Loading";
 
 type Props = {};
 
 const Passaparola = (props: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [wordInfo, setWordInfo] = useState<any>({});
+  const [isLoading, setIsLoading] = useState(false);
   const storedAnswers = localStorage.getItem("answers");
   const isReturnPassedItems = localStorage.getItem("isReturnPassedItems");
   const parsedAnswers = storedAnswers ? JSON.parse(storedAnswers) : [];
@@ -31,14 +33,14 @@ const Passaparola = (props: Props) => {
           x.partOfSpeech === "noun" ||
           x.partOfSpeech === "adjective"
       )?.definitions[0].definition ??
-      "Opps! Something went wrong. Please try again"
+      "-"
     );
   };
 
   return (
     <Wrapper>
       <div
-        style={{ paddingLeft: "16px", paddingTop: '16px',cursor: "pointer" }}
+        style={{ paddingLeft: "16px", paddingTop: "16px", cursor: "pointer" }}
         onClick={() => navigate("/")}
       >
         <Back />
@@ -64,6 +66,7 @@ const Passaparola = (props: Props) => {
                   status={status}
                   setWordInfo={setWordInfo}
                   activeIndex={activeIndex}
+                  setIsLoading={setIsLoading}
                 />
               </SwiperSlide>
             );
@@ -79,6 +82,7 @@ const Passaparola = (props: Props) => {
                   setWordInfo={setWordInfo}
                   activeIndex={activeIndex}
                   isReturnPassedItems={isReturnPassedItems === "true"}
+                  setIsLoading={setIsLoading}
                 />
               </SwiperSlide>
             );
@@ -93,7 +97,11 @@ const Passaparola = (props: Props) => {
         </div>
       </Swiper>
       <QuestionWrapper>
-        <Question> {getQuestion()}</Question>
+        {isLoading ? (
+          <QuestionLoading />
+        ) : (
+          <Question> {getQuestion()}</Question>
+        )}
       </QuestionWrapper>
     </Wrapper>
   );

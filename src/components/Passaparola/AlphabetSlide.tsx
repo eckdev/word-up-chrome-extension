@@ -7,55 +7,70 @@ import { alphabet } from "../../data/alphabet";
 type AlphabetSlideProps = {
   label: string;
   status?: "active" | "passive" | "success" | "failed";
-  setWordInfo(word:any): void;
+  setWordInfo(word: any): void;
   activeIndex: number;
-  isReturnPassedItems?: boolean
+  isReturnPassedItems?: boolean;
+  setIsLoading(loading:boolean): void
 };
 
-const AlphabetSlideItem = ({ label, status,setWordInfo,activeIndex,isReturnPassedItems }: AlphabetSlideProps) => {
+const AlphabetSlideItem = ({
+  label,
+  status,
+  activeIndex,
+  isReturnPassedItems,
+  setWordInfo,
+  setIsLoading
+}: AlphabetSlideProps) => {
   const swiperSlide = useSwiperSlide();
   const getNewWord = useCallback(() => {
     import(`../../data/advanced.json`)
       .then((res) => {
-        const data: string[] = res.Words
-        const wordsStartingWithLabel = data.filter(word => word.toLowerCase().startsWith(label.toLowerCase()));
-        const randomWord = wordsStartingWithLabel[Math.floor(Math.random() * wordsStartingWithLabel.length)];
-        getWord(randomWord)
+        const data: string[] = res.Words;
+        const wordsStartingWithLabel = data.filter((word) =>
+          word.toLowerCase().startsWith(label.toLowerCase())
+        );
+        const randomWord =
+          wordsStartingWithLabel[
+            Math.floor(Math.random() * wordsStartingWithLabel.length)
+          ];
+        getWord(randomWord);
       })
-      .catch(_ => null);
-
+      .catch((_) => null);
   }, [label]);
 
   const getWord = async (word: string) => {
-    const result = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    )
-      .then((res) => res.json())
+    try {
+      setIsLoading(true);
+      const result = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      ).then((res) => res.json());
 
-    setWordInfo(result[0]);
+      setWordInfo(result[0]);
+    } catch (error) {
+      setWordInfo({});
+    } finally {
+      setIsLoading(false);
+    }
   };
   useEffect(() => {
-
     if (isReturnPassedItems) {
       const storedAnswers = localStorage.getItem("answers");
-      const parsedAnswers = storedAnswers
-      ? JSON.parse(storedAnswers)
-      : [];
+      const parsedAnswers = storedAnswers ? JSON.parse(storedAnswers) : [];
 
-      const word = parsedAnswers.find((x: { id: number; }) => x.id === activeIndex)
+      const word = parsedAnswers.find(
+        (x: { id: number }) => x.id === activeIndex
+      );
       setWordInfo(word);
     }
 
     if (!isReturnPassedItems) {
-      const labelIndex = alphabet.findIndex(x => x === label);
+      const labelIndex = alphabet.findIndex((x) => x === label);
       if (labelIndex === activeIndex) {
-          getNewWord();
+        getNewWord();
       }
     }
+  }, [activeIndex, getNewWord, label, isReturnPassedItems]);
 
-
-  }, [activeIndex, getNewWord, label,isReturnPassedItems]);
-  
   return (
     <>
       <AlphabetSlideWrapper
