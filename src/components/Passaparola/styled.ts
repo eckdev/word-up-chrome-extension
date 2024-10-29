@@ -11,6 +11,7 @@ export const AlphabetSlideWrapper = styled.div<StatusProps>`
   justify-content: center;
   align-items: center;
   font-size: 16px;
+  
   width: 56px;
   height: 56px;
   border-radius: 999px;
@@ -82,12 +83,13 @@ export const Question = styled.div`
   color: #111;
   max-height: 200px;
   overflow: auto;
+  position: relative;
   z-index:9999;
 `
 
 export const AnswerWrapper = styled.div`
     height: 54px;
-    width: 100%;
+    width: 360px;
     display: flex;
     background: #fff;
     border-radius: 16px;
@@ -108,6 +110,7 @@ export const AnswerInput = styled.input`
     padding: 0 16px;
     width: 100%;
     border-radius: 16px;
+      font-family: Lexend, sans-serif !important;
     &::placeholder {
       font-size: 14px;
       font-weight: 400;
@@ -133,6 +136,7 @@ export const AnswerButton = styled.button<ButtonProps>`
     border: 1px solid #ebedf0;
     color: #323233;
     margin-right: 16px;
+      font-family: Lexend, sans-serif !important;
     ${(props) => {
       switch (props.status) {
         case "send":

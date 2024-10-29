@@ -25,7 +25,7 @@ const Passaparola = (props: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [wordInfo, setWordInfo] = useState<any>({});
   const [isLoading, setIsLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(300);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Passaparola = (props: Props) => {
           x.partOfSpeech === "verb" ||
           x.partOfSpeech === "noun" ||
           x.partOfSpeech === "adjective"
-      )?.definitions[0].definition ?? "-"
+      )?.definitions[0].definition ?? "Opps!. Skip this question"
     );
   };
 

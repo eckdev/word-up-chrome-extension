@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background: #fff;
   border: 12px solid ${mainColor};
   z-index: 999;
-  font-family: Arial, sans-serif;
+  font-family: Lexend, sans-serif !important;
 `;
 
 export const WordBox = styled.div`
@@ -198,7 +198,7 @@ export const InfoText = styled.div`
 `;
 
 export const GameModeText = styled.div`
-  font-weight: bold;
+  font-weight: 500;
   font-size: 18px;
 `;
 
